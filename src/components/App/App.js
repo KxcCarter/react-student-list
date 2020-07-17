@@ -8,10 +8,28 @@ class App extends Component {
     studentList: [],
   };
 
+  componentDidMount() {
+    console.log('READY');
+    this.getData();
+  }
+
   // This function is called by the StudentForm when the submit button is pressed
   addStudent = (newStudent) => {
     console.log(newStudent);
     // POST your data here
+  };
+
+  getData() {
+    axios({
+      method: 'GET',
+      url: '/students',
+    })
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.log('ERROR!:', error);
+      });
   }
 
   render() {
@@ -20,8 +38,8 @@ class App extends Component {
         <header className="App-header">
           <h1 className="App-title">GitHub Student List</h1>
         </header>
-        <br/>
-        <StudentForm addStudent={this.addStudent}/>
+        <br />
+        <StudentForm addStudent={this.addStudent} />
 
         <p>Student list goes here.</p>
       </div>
