@@ -4,12 +4,21 @@ class StudentList extends Component {
   render() {
     console.log(this.props.students);
     const studentListItem = this.props.students.map((item, index) => {
-      return <li key={item.id}>{item.github_name}</li>;
+      return (
+        <tr>
+          <td key={item.id}>{item.github_name}</td>
+        </tr>
+      );
     });
 
     return (
       <div>
-        <ul>{studentListItem}</ul>;
+        <table>
+          <tr>
+            <th>Github Username</th>
+          </tr>
+          {studentListItem}
+        </table>
       </div>
     );
   }
