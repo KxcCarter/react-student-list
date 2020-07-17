@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import PropTypes from 'prop-types';
 
 class Student {
@@ -10,11 +9,6 @@ class Student {
 
 class StudentForm extends Component {
   state = new Student();
-
-  componentDidMount() {
-    console.log('READY');
-    this.getData();
-  }
 
   // Called when the input field changes
   handleChange = (event) => {
@@ -32,19 +26,6 @@ class StudentForm extends Component {
   clearStudentFields = () => {
     this.setState(new Student());
   };
-
-  getData() {
-    axios({
-      method: 'GET',
-      url: '/students',
-    })
-      .then((response) => {
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.log('ERROR!:', error);
-      });
-  }
 
   render() {
     return (
