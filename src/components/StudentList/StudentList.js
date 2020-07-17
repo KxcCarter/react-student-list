@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styles from '../StudentList/StudentList.module.css';
 
 class StudentList extends Component {
   render() {
@@ -12,7 +13,7 @@ class StudentList extends Component {
     });
 
     return (
-      <div>
+      <div className={styles.listContainer}>
         <table>
           <tr>
             <th>Github Username</th>
