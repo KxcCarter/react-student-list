@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import StudentForm from '../StudentForm/StudentForm';
+import StudentList from '../StudentList/StudentList';
 
 class App extends Component {
   state = {
@@ -37,19 +38,14 @@ class App extends Component {
       url: '/students',
     })
       .then((response) => {
-        console.log('response from database', response.data);
         this.setState({
-          songs: response.data,
+          studentList: response.data,
         });
       })
       .catch((error) => {
         console.log('ERROR!:', error);
       });
   }
-
-  // postData() {
-
-  // }
 
   render() {
     return (
@@ -61,6 +57,7 @@ class App extends Component {
         <StudentForm addStudent={this.addStudent} />
 
         <p>Student list goes here.</p>
+        <StudentList students={this.state.studentList} />
       </div>
     );
   }
