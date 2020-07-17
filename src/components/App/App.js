@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import './App.css';
 import StudentForm from '../StudentForm/StudentForm';
+import StudentList from '../StudentList/StudentList';
 
 class App extends Component {
   state = {
@@ -17,6 +18,18 @@ class App extends Component {
   addStudent = (newStudent) => {
     console.log(newStudent);
     // POST your data here
+
+    axios({
+      method: 'POST',
+      url: '/students',
+      data: newStudent,
+    })
+      .then((response) => {
+        this.getData();
+      })
+      .catch((err) => {
+        console.log('POST ERROR!', err);
+      });
   };
 
   getData() {
@@ -25,7 +38,9 @@ class App extends Component {
       url: '/students',
     })
       .then((response) => {
-        console.log(response.data);
+        this.setState({
+          studentList: response.data,
+        });
       })
       .catch((error) => {
         console.log('ERROR!:', error);
@@ -42,6 +57,7 @@ class App extends Component {
         <StudentForm addStudent={this.addStudent} />
 
         <p>Student list goes here.</p>
+        <StudentList students={this.state.studentList} />
       </div>
     );
   }
